@@ -93,9 +93,9 @@ $(document).ready(function() {
       $('#poslji-sporocilo').focus();
     });
     
-    $('#seznam-uporabnikov').click(function() {
+    $('#seznam-uporabnikov div').click(function() {
         var vhod = $('#poslji-sporocilo');
-        vhod.val('/zasebno "' + $(this).text() +'"');
+        vhod.val('/zasebno "' + $(this).text() +'" ');
         vhod.focus();
     })
   });
