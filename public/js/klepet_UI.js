@@ -92,6 +92,12 @@ $(document).ready(function() {
       klepetApp.procesirajUkaz('/pridruzitev ' + $(this).text());
       $('#poslji-sporocilo').focus();
     });
+    
+    $('#seznam-uporabnikov').click(function() {
+        var vhod = $('#poslji-sporocilo');
+        vhod.val('/zasebno "' + $(this).text() +'"');
+        vhod.focus();
+    })
   });
 
   socket.on('uporabniki', function(uporabniki) {
