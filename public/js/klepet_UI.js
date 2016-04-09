@@ -29,7 +29,7 @@ function procesirajVnosUporabnika(klepetApp, socket) {
     $('#sporocila').scrollTop($('#sporocila').prop('scrollHeight'));
   }
 
-  if (sporocilo.match(/https?:.+\.jpg|png|gif/)) {
+  if (sporocilo.match(/[a-z\-_0-9\/\:\.]*\.jpg|jpeg|png|gif/g)) {
     var slike = '<div>' + dodajSlike(sporocilo) + '</div>';
     klepetApp.posljiSlike(trenutniKanal, slike);
     $('#sporocila').append(slike);
@@ -146,13 +146,21 @@ function dodajSmeske(vhodnoBesedilo) {
 }
 
 function dodajSlike(vhodnoBesedilo) {
-  var regex = /https?:.+\.jpg|png|gif/;
+  var regex = /[a-z\-_0-9\/\:\.]*\.jpg|jpeg|png|gif/g;
+  // var zadetki = vhodnoBesedilo.match(regex);
   var zadetki = regex.exec(vhodnoBesedilo);
   var slike = '';
-  if (zadetki != null) {
-    zadetki.forEach(function(zadetek) {
-      slike += "<img hspace='20' width='200' src='" + zadetek + "'>";
-    });
-  }
+  // if (zadetki != null) {
+  //   zadetki.forEach(function(zadetek) {
+  //     slike += "<img hspace='20' width='200' src='" + zadetek + "'>";
+  //   });
+  // }
+  
+   while(zadetki != null) {
+    slike += "<img hspace='20' width='200' src='" + zadetki[0] + "'> ";
+    zadetki = regex.exec(vhodnoBesedilo);
+    // console.log(zadetki[0]); 
+    }
+  
   return slike;
 }
