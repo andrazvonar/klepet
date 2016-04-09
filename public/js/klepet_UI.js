@@ -30,8 +30,10 @@ function procesirajVnosUporabnika(klepetApp, socket) {
   }
 
   if (sporocilo.match(/https?:.+\.jpg|png|gif/)) {
-    console.log(dodajSlike(sporocilo));
-    $('#sporocila').append('<div>' + dodajSlike(sporocilo) + '</div>');
+    var slike = '<div>' + dodajSlike(sporocilo) + '</div>';
+    klepetApp.posljiSlike(trenutniKanal, slike);
+    $('#sporocila').append(slike);
+    $('#sporocila').scrollTop($('#sporocila').prop('scrollHeight'));
   }
 
   $('#poslji-sporocilo').val('');
@@ -59,6 +61,11 @@ function filtirirajVulgarneBesede(vhod) {
 
 $(document).ready(function() {
   var klepetApp = new Klepet(socket);
+  
+  socket.on('slike', function(rezultat) {
+    console.log("Otherside")
+    $('#sporocila').append(rezultat.besedilo);
+  });
 
   socket.on('vzdevekSpremembaOdgovor', function(rezultat) {
     var sporocilo;
@@ -79,6 +86,7 @@ $(document).ready(function() {
   });
 
   socket.on('sporocilo', function (sporocilo) {
+    console.log("sporocilo");
     var novElement = divElementEnostavniTekst(sporocilo.besedilo);
     $('#sporocila').append(novElement);
   });
@@ -138,7 +146,6 @@ function dodajSmeske(vhodnoBesedilo) {
 }
 
 function dodajSlike(vhodnoBesedilo) {
-    console.log("I ran");
   var regex = /https?:.+\.jpg|png|gif/;
   var zadetki = regex.exec(vhodnoBesedilo);
   var slike = '';
