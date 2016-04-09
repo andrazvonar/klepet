@@ -58,7 +58,13 @@ $(document).ready(function() {
   var klepetApp = new Klepet(socket);
   
   socket.on('dregljaj', function(vzdevek) {
-    //TODO
+    var vsebina = $('#vsebina');
+    vsebina.jrumble();
+    vsebina.trigger('startRumble');
+    setTimeout(function() {
+      vsebina.trigger('stopRumble');
+    }, 1500);
+    
   });
 
   socket.on('vzdevekSpremembaOdgovor', function(rezultat) {
