@@ -72,13 +72,21 @@ $(document).ready(function() {
   var klepetApp = new Klepet(socket);
   
   socket.on('slike', function(rezultat) {
-    console.log("Otherside")
     $('#sporocila').append(rezultat.besedilo);
   });
   
   socket.on('video', function(rezultat) {
     $('#sporocila').append(rezultat.besedilo);
   })
+  
+  socket.on('dregljaj', function(vzdevek) {
+    var vsebina = $('#vsebina');
+    vsebina.jrumble();
+    vsebina.trigger('startRumble');
+    setTimeout(function() {
+      vsebina.trigger('stopRumble');
+    }, 1500);
+  });
 
   socket.on('vzdevekSpremembaOdgovor', function(rezultat) {
     var sporocilo;
@@ -99,7 +107,6 @@ $(document).ready(function() {
   });
 
   socket.on('sporocilo', function (sporocilo) {
-    console.log("sporocilo");
     var novElement = divElementEnostavniTekst(sporocilo.besedilo);
     $('#sporocila').append(novElement);
   });
@@ -177,7 +184,7 @@ function dodajSlike(vhodnoBesedilo) {
 }
 
 function dodajVideo(vhodnoBesedilo) {
-  var regex = /https?:\/\/www.youtube.com\/watch\?v=\w+\b/g;
+  var regex = /https?:\/\/www.youtube.com\/watch\?v=[\w\-_]+\b/g;
   var zadetki = regex.exec(vhodnoBesedilo);
   var video = '';
    while(zadetki != null) {

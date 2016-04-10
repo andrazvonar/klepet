@@ -20,7 +20,6 @@ Klepet.prototype.posljiSporocilo = function(kanal, besedilo) {
 
 
 Klepet.prototype.posljiSlike = function(kanal, besedilo) {
-  console.log("prototype");
   var sporocilo = {
     kanal: kanal,
     besedilo: besedilo
@@ -61,6 +60,11 @@ Klepet.prototype.procesirajUkaz = function(ukaz) {
       } else {
         sporocilo = 'Neznan ukaz';
       }
+      break;
+    case 'dregljaj':
+      besede.shift();
+      var vzdevek = besede.join(' ');
+      this.socket.emit('dregljaj', { vzdevek: vzdevek });
       break;
     default:
       sporocilo = 'Neznan ukaz.';
