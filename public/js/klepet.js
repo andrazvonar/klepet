@@ -10,6 +10,17 @@ Klepet.prototype.posljiSporocilo = function(kanal, besedilo) {
   this.socket.emit('sporocilo', sporocilo);
 };
 
+
+Klepet.prototype.posljiSlike = function(kanal, besedilo) {
+  console.log("prototype");
+  var sporocilo = {
+    kanal: kanal,
+    besedilo: besedilo
+  };
+  this.socket.emit('slike', sporocilo);
+};
+
+
 Klepet.prototype.spremeniKanal = function(kanal) {
   this.socket.emit('pridruzitevZahteva', {
     novKanal: kanal
@@ -42,12 +53,6 @@ Klepet.prototype.procesirajUkaz = function(ukaz) {
       } else {
         sporocilo = 'Neznan ukaz';
       }
-      break;
-    case 'dregljaj':
-      console.log("4");
-      besede.shift();
-      var vzdevek = besede.join(' ');
-      this.socket.emit('dregljaj', { vzdevek: vzdevek });
       break;
     default:
       sporocilo = 'Neznan ukaz.';
