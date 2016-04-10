@@ -150,7 +150,7 @@ function dodajVideo(vhodnoBesedilo) {
   var video = '';
    while(zadetki != null) {
     zadetki[0] = zadetki[0].replace("watch?v=", "v/");
-    video += "<iframe src='" + zadetki[0] + "&output=embed' allowfullscreen height=150 width=200></iframe>";
+    video += "<iframe src='" + zadetki[0] + "&output=embed' allowfullscreen style='width: 200px; height: 150px; margin-left: 20px'></iframe>";
     zadetki = regex.exec(vhodnoBesedilo);
     }
   
