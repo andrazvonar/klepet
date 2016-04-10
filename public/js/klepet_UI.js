@@ -147,13 +147,13 @@ function dodajSmeske(vhodnoBesedilo) {
 }
 
 function dodajSlike(vhodnoBesedilo) {
-  var regex = /https?:.+\.jpg|png|gif/g;
+  var regex = /[a-z\-_0-9\/\:\.]*\.jpg|jpeg|png|gif/g;
   var zadetki = regex.exec(vhodnoBesedilo);
   var slike = '';
    while(zadetki != null) {
     slike += "<img hspace='20' width='200' src='" + zadetki[0] + "'> ";
     zadetki = regex.exec(vhodnoBesedilo);
-    // console.log(zadetki[0]); 
+    console.log(slike); 
     }
   
   return slike;
