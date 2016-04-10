@@ -99,7 +99,6 @@ function divElementEnostavniTekst(sporocilo) {
      for (var i=0; i < uporabniki.length; i++) {
        $('#seznam-uporabnikov').append(divElementEnostavniTekst(uporabniki[i]));
      }
-    
     $('#seznam-uporabnikov div').click(function() {
       var vhod = $('#poslji-sporocilo');
       vhod.val('/zasebno "' + $(this).text() +'" ');
