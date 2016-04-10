@@ -189,11 +189,7 @@ function dodajVideo(vhodnoBesedilo) {
   var video = '';
    while(zadetki != null) {
     zadetki[0] = zadetki[0].replace("watch?v=", "v/");
-<<<<<<< HEAD
-    video += "<iframe src='" + zadetki[0] + "&output=embed' hspace='20' allowfullscreen height=150 width=200></iframe>";
-=======
     video += "<iframe src='" + zadetki[0] + "&output=embed' allowfullscreen style='width: 200px; height: 150px; margin-left: 20px'></iframe>";
->>>>>>> youtube
     zadetki = regex.exec(vhodnoBesedilo);
     }
   
